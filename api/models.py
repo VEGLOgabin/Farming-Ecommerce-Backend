@@ -108,7 +108,7 @@ class Product(models.Model):  # Renamed for consistency
     quantity = models.PositiveIntegerField()  # Enforce non-negative values
     prod_unit = models.CharField(max_length=15)
     money_unit = models.CharField(max_length=15)
-    category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="products")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
     image = models.ImageField(upload_to='produits/', blank=False, null=False)
     status = models.CharField(max_length=30, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0])
     added_at = models.DateTimeField(auto_now_add=True)
@@ -159,7 +159,7 @@ class ContactUS(models.Model):
 # Feedback model
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='feedbacks')
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='feedbacks')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='feedbacks')
     rate = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     comment = models.TextField()
     added_at = models.DateTimeField(auto_now_add=True)
